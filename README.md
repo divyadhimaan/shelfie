@@ -24,6 +24,22 @@ Product requirements and the version roadmap live in [docs/requirements.md](docs
 
 In development without `AUTH_RESEND_KEY`, the sign-in link is printed in the dev server log instead of emailed.
 
+## Deploying (Vercel + Neon)
+
+1. Create a Postgres database on [Neon](https://neon.tech) and copy the **pooled** connection string.
+2. Create the tables from your machine: put that string in `.env.local` as `DATABASE_URL`, then `npm run db:migrate`.
+3. Import the GitHub repo in [Vercel](https://vercel.com/new) and set these environment variables:
+
+   | Variable | Value |
+   | --- | --- |
+   | `DATABASE_URL` | Neon pooled connection string |
+   | `AUTH_SECRET` | a new secret from `npx auth secret` (don't reuse your local one) |
+   | `AUTH_RESEND_KEY` | Resend API key, for magic-link emails |
+   | `AUTH_EMAIL_FROM` | e.g. `Shelfie <login@yourdomain.com>`; until a domain is verified in Resend, only `onboarding@resend.dev` works and it only delivers to your own Resend account email |
+   | `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET` | optional; add `https://<your-domain>/api/auth/callback/google` as a redirect URI |
+
+4. Deploy. Run `npm run db:migrate` against the production database whenever a change adds a migration in `drizzle/`.
+
 ## Database
 
 Schema lives in [src/db/schema.ts](src/db/schema.ts) (Drizzle ORM, Postgres). After changing it:

@@ -24,7 +24,7 @@ export async function uploadGoodreadsCsv(
   if (!(file instanceof File) || file.size === 0)
     return { ok: false, error: "Choose your Goodreads CSV file." };
   if (file.size > MAX_FILE_BYTES)
-    return { ok: false, error: "That file is over 10 MB. Is it the Goodreads export?" };
+    return { ok: false, error: "That file is over 4 MB. Is it the Goodreads export?" };
   if (!file.name.toLowerCase().endsWith(".csv"))
     return { ok: false, error: "The Goodreads export is a .csv file." };
 

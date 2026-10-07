@@ -13,8 +13,8 @@ const nextConfig = {
   },
   experimental: {
     serverActions: {
-      // Goodreads exports with long reviews can be several MB (limit enforced again in the action).
-      bodySizeLimit: "11mb",
+      // Just above the 4 MB file limit enforced in the action; Vercel caps bodies at 4.5 MB.
+      bodySizeLimit: "4.5mb",
     },
   },
 };

@@ -7,7 +7,8 @@ import { findWork } from "@/lib/catalog/openlibrary";
 import { type GoodreadsBook, normalizeRow, parseGoodreadsExport } from "@/lib/goodreads/parse";
 import { upsertEdition, upsertWorkFromGoodreads, upsertWorkFromOpenLibrary } from "./catalog";
 
-export const MAX_FILE_BYTES = 10 * 1024 * 1024;
+// Vercel rejects request bodies over 4.5 MB, so stay under it. Typical exports are well below 1 MB.
+export const MAX_FILE_BYTES = 4 * 1024 * 1024;
 const BATCH_SIZE = 8;
 const CONCURRENCY = 4;
 const ACTIVE_STATUSES = ["uploaded", "matching", "review"] as const;
