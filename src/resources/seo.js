@@ -1,5 +1,10 @@
-// IMPORTANT: Replace with the production domain once it's registered - it's used in meta tags and schema
-const baseURL = "https://shelfie.app";
+// Used in meta tags and schema. Set NEXT_PUBLIC_SITE_URL once there's a custom domain;
+// until then Vercel's production URL is used, and localhost in development.
+const baseURL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
 
 const description =
   "Track your reading, import your Goodreads history, and share your Year in Books as Instagram-ready cards.";
