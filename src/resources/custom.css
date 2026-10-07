@@ -67,3 +67,10 @@
   --scheme-neutral-600-50: rgba(137,152,159,0.5);
   /*
 }*/
+
+/* Shelfie chart color: muted terracotta. Validated with the dataviz palette script
+   (lightness, chroma, contrast) on light #fefcf4 and dark #171611 surfaces.
+   Softer alternatives that also pass: clay oklch(0.63 0.10 50), amber-sand oklch(0.66 0.10 70). */
+:root {
+  --shelfie-chart: oklch(0.6 0.11 40);
+}

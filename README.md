@@ -45,6 +45,15 @@ npm run db:studio     # browse data
 
 Logic lives in [src/lib/import/service.ts](src/lib/import/service.ts). Run the parser and genre tests with `npm test`.
 
+## Year Shelfie (wrap) and share cards
+
+`/wrap` shows a year as story cards (tap, swipe or arrow keys). Each card is a PNG rendered on the server with Satori (`next/og`):
+
+- `GET /api/wrap/:year/:card?size=story|portrait|square` → one card (`&download=1` to save it)
+- `GET /api/wrap/:year/zip?size=…` → every card in a zip
+
+Cards are built from the year's reads in [src/lib/wrap/build.ts](src/lib/wrap/build.ts) and drawn in [src/lib/wrap/render.tsx](src/lib/wrap/render.tsx). Books marked hidden never appear on cards. Card fonts come from `@fontsource/fraunces` and `@fontsource/geist`.
+
 ## Auth
 
 Auth.js v5 ([src/auth.ts](src/auth.ts)) with database sessions: email magic links (Resend) and Google. Library, Import, Stats and Wrap call `requireUser()` from [src/lib/session.ts](src/lib/session.ts) and redirect to `/signin` when signed out.

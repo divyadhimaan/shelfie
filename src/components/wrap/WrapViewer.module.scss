@@ -1,0 +1,67 @@
+.stage {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #171611; // matches the card background while an image loads
+  touch-action: pan-y;
+  user-select: none;
+  outline: none;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--brand-border-strong);
+  }
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+// Invisible tap zones: left third goes back, the rest goes forward (like Instagram stories).
+.zonePrev,
+.zoneNext {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.zonePrev {
+  left: 0;
+  width: 33%;
+}
+
+.zoneNext {
+  right: 0;
+  width: 67%;
+}
+
+.segments {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 2;
+}
+
+.segment {
+  flex: 1;
+  height: 4px;
+  border: 0;
+  padding: 0;
+  border-radius: 2px;
+  background: rgba(247, 245, 237, 0.3);
+  cursor: pointer;
+
+  &[data-done="true"] {
+    background: rgba(247, 245, 237, 0.95);
+  }
+}

@@ -1,0 +1,76 @@
+// Chart color lives in resources/custom.css (--shelfie-chart).
+$bar: var(--shelfie-chart);
+
+.plot {
+  position: relative;
+  height: 12rem;
+
+  @media (max-width: 768px) {
+    height: 10rem;
+  }
+}
+
+.gridline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--neutral-alpha-weak);
+}
+
+.columns {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 2px;
+}
+
+.column {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  outline: none;
+  cursor: default;
+  border-radius: 4px;
+
+  // The whole column is the hit target, not just the painted bar.
+  &:hover,
+  &:focus-visible {
+    background: var(--neutral-alpha-weak);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--brand-border-strong);
+  }
+
+  &:hover .tooltip,
+  &:focus-visible .tooltip {
+    opacity: 1;
+    transform: translate(-50%, -4px);
+  }
+}
+
+.bar {
+  width: min(24px, 70%);
+  background: $bar;
+  // Rounded data end, square at the baseline.
+  border-radius: 4px 4px 0 0;
+}
+
+.tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--bar-height) + 8px);
+  transform: translate(-50%, 0);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 2;
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+}
