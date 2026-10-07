@@ -146,6 +146,8 @@ export const works = pgTable(
     coverUrl: text("cover_url"),
     // Typical page count across editions; an edition's own count wins when known.
     pages: integer("pages"),
+    // Raw catalog subjects, kept so genres can be recomputed when the mapping improves.
+    subjects: text("subjects").array().notNull().default(sql`'{}'::text[]`),
     // Normalised to Shelfie's fixed genre list (CAT-4)
     genres: text("genres").array().notNull().default(sql`'{}'::text[]`),
     series: text("series"),

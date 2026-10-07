@@ -45,6 +45,13 @@ npm run db:studio     # browse data
 
 Logic lives in [src/lib/import/service.ts](src/lib/import/service.ts). Run the parser and genre tests with `npm test`.
 
+Genres come from Open Library subjects plus readers' shelves, mapped by [src/lib/catalog/genres.ts](src/lib/catalog/genres.ts). After changing the mapping, recompute the catalog:
+
+```bash
+npm run catalog:genres -- --dry   # preview changes
+npm run catalog:genres            # apply
+```
+
 ## Year Shelfie (wrap) and share cards
 
 `/wrap` shows a year as story cards (tap, swipe or arrow keys). Each card is a PNG rendered on the server with Satori (`next/og`):

@@ -48,7 +48,7 @@ export default function Home() {
         path={meta.home.path}
       />
 
-      <Row maxWidth="l" gap="64" vertical="center" s={{ direction: "column" }}>
+      <Row maxWidth="l" gap="64" vertical="center" m={{ direction: "column", gap: "40" }}>
         <Column flex={1} gap="24">
           <Heading as="h1" variant="display-strong-l" wrap="balance">
             Your year in books, ready to post
@@ -67,7 +67,7 @@ export default function Home() {
           </Row>
         </Column>
 
-        <Row flex={1} fillWidth gap="20" horizontal="center" s={{ gap: "12" }}>
+        <Row flex={1} fillWidth maxWidth={36} gap="20" horizontal="center" s={{ gap: "12" }}>
           {sampleShelf.map((book) => (
             <Book
               key={book.title}

@@ -56,6 +56,7 @@ export async function upsertWorkFromOpenLibrary(tx: Db, ol: OpenLibraryWork, boo
       coverUrl: ol.coverUrl,
       pages: ol.pages ?? book.pages,
       firstPublishedYear: ol.firstPublishedYear ?? book.originalPublicationYear,
+      subjects: ol.subjects,
       genres: normalizeGenres(ol.subjects, book.tags),
       series: book.series,
       seriesPosition: book.seriesPosition,

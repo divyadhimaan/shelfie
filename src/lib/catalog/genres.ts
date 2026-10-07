@@ -53,8 +53,15 @@ const RULES: [RegExp, Genre][] = [
   [/literary fiction|literary-fiction|fiction, literary|modern fiction/, "Literary Fiction"],
   [/classics?\b|classic literature/, "Classics"],
   [/contemporary/, "Contemporary"],
-  [/young adult|\bya\b|\bteens?\b/, "Young Adult"],
-  [/juvenile|children'?s/, "Children's"],
+  // Audience tags only, not topics: "Homeless children" is about children, not for them.
+  [
+    /young adult (fiction|literature|books)|teen & young adult|^ya\b|\bya (fiction|fantasy)|^young[- ]adult$/,
+    "Young Adult",
+  ],
+  [
+    /juvenile (fiction|literature|works|fantasy|audience)|children'?s (books|stories|fiction|literature)|^children'?s$|^kids$/,
+    "Children's",
+  ],
   [/graphic novels?|comics?|manga/, "Graphic Novels"],
   [/poetry|poems/, "Poetry"],
   [/mythology|myths|greek gods/, "Mythology"],
@@ -95,6 +102,15 @@ const NON_FICTION_ONLY = new Set<Genre>([
   "Non-Fiction",
 ]);
 
+/** Who a book is for, rather than what it is. Ranked after content genres. */
+const AUDIENCE = new Set<Genre>(["Young Adult", "Children's"]);
+/** Audience and format genres: catalogs attach these from single editions, so they need a strong signal. */
+const NEEDS_STRONG_SIGNAL = new Set<Genre>([...AUDIENCE, "Graphic Novels"]);
+const STRONG_MIN_MATCHES = 3;
+const STRONG_MIN_SHARE = 0.1;
+/** With this many subjects, one stray subject isn't enough to name a genre. */
+const LONG_SUBJECT_LIST = 15;
+
 const isFictionSubject = (subject: string) => {
   const s = subject.trim().toLowerCase();
   return !/non-?fiction/.test(s) && /^fiction\b|\bfiction$/.test(s);
@@ -106,26 +122,47 @@ const isFictionSubject = (subject: string) => {
  */
 export function normalizeGenres(subjects: string[], shelves: string[] = [], limit = 3): Genre[] {
   const counts = new Map<Genre, number>();
-  const tally = (text: string, weight: number) => {
+  const fromSubjects = new Map<Genre, number>();
+  const fromShelves = new Set<Genre>();
+  const tally = (text: string, weight: number, source: "subject" | "shelf") => {
     // Shelf names use hyphens ("young-adult"); test both spellings, counting each genre once.
     const variants = [text.toLowerCase(), text.toLowerCase().replace(/-/g, " ")];
     for (const [pattern, genre] of RULES) {
-      if (variants.some((v) => pattern.test(v)))
-        counts.set(genre, (counts.get(genre) ?? 0) + weight);
+      if (!variants.some((v) => pattern.test(v))) continue;
+      counts.set(genre, (counts.get(genre) ?? 0) + weight);
+      if (source === "shelf") fromShelves.add(genre);
+      else fromSubjects.set(genre, (fromSubjects.get(genre) ?? 0) + 1);
     }
   };
-  for (const subject of subjects) tally(subject, 1);
-  for (const shelf of shelves) tally(shelf, 3);
+  for (const subject of subjects) tally(subject, 1, "subject");
+  for (const shelf of shelves) tally(shelf, 3, "shelf");
 
   // A novel's "History" subject describes its setting, not its genre.
   if (subjects.some(isFictionSubject)) {
     for (const genre of NON_FICTION_ONLY) counts.delete(genre);
   }
+
+  // Best content genre before pruning, so a book never ends up with none.
+  const fallback = [...counts.entries()]
+    .filter(([genre]) => !NEEDS_STRONG_SIGNAL.has(genre))
+    .sort((a, b) => b[1] - a[1])[0];
+
+  for (const genre of [...counts.keys()]) {
+    if (fromShelves.has(genre)) continue; // the reader's own shelf always counts
+    const matches = fromSubjects.get(genre) ?? 0;
+    const strong =
+      matches >= STRONG_MIN_MATCHES && matches / Math.max(1, subjects.length) >= STRONG_MIN_SHARE;
+    if (NEEDS_STRONG_SIGNAL.has(genre) && !strong) counts.delete(genre);
+    else if (subjects.length > LONG_SUBJECT_LIST && matches < 2) counts.delete(genre);
+  }
+  if (counts.size === 0 && fallback) counts.set(fallback[0], fallback[1]);
+
   // Romantasy is the specific form of Romance + Fantasy.
   if (counts.has("Romantasy")) counts.delete("Romance");
 
+  // What a book is comes before who it's for: audience genres rank after content genres.
   return [...counts.entries()]
-    .sort((a, b) => b[1] - a[1])
+    .sort((a, b) => Number(AUDIENCE.has(a[0])) - Number(AUDIENCE.has(b[0])) || b[1] - a[1])
     .slice(0, limit)
     .map(([genre]) => genre);
 }

@@ -26,7 +26,12 @@ export function LibraryGrid({ books }: { books: LibraryBook[] }) {
     <Grid columns="5" gap="24" m={{ columns: 4 }} s={{ columns: 2 }}>
       {books.map((book) => (
         <Column key={book.id} gap="12">
-          <Book src={book.coverUrl ?? undefined} alt={`Cover of ${book.title}`} sizes={200}>
+          <Book
+            href={`/library/${book.id}`}
+            src={book.coverUrl ?? undefined}
+            alt={`Cover of ${book.title}`}
+            sizes={200}
+          >
             {!book.coverUrl && (
               <Column fill padding="12" paddingLeft="16" vertical="end" background="brand-strong">
                 <Text variant="heading-strong-s" onBackground="neutral-strong">

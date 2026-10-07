@@ -61,12 +61,13 @@ export function AppHeader({ user }: AppHeaderProps) {
           <ThemeSwitcher collapsed direction="row" />
           {user ? (
             <Row gap="8" vertical="center">
-              <Avatar
-                size="m"
-                src={user.image ?? undefined}
-                value={(user.name ?? user.email ?? "?").charAt(0).toUpperCase()}
-                aria-label={user.name ?? user.email ?? "Your account"}
-              />
+              <SmartLink href="/settings" unstyled aria-label="Your settings">
+                <Avatar
+                  size="m"
+                  src={user.image ?? undefined}
+                  value={(user.name ?? user.email ?? "?").charAt(0).toUpperCase()}
+                />
+              </SmartLink>
               <form action={signOutAction}>
                 <IconButton
                   type="submit"
