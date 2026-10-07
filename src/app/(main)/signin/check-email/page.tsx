@@ -1,4 +1,5 @@
 import { Button, Card, Column, Heading, Icon, Text } from "@once-ui-system/core";
+import { emailLinksLoggedOnly } from "@/auth";
 
 export const metadata = { title: "Check your email · Shelfie" };
 
@@ -22,6 +23,14 @@ export default function CheckEmailPage() {
           <Text variant="body-default-m" onBackground="neutral-weak">
             We sent you a sign-in link. It works once and expires in 24 hours.
           </Text>
+          {emailLinksLoggedOnly && (
+            <Column background="warning-alpha-weak" padding="12" radius="m">
+              <Text variant="body-default-s" onBackground="warning-strong">
+                Development mode: no email is sent because AUTH_RESEND_KEY isn&apos;t set. Open the
+                sign-in link printed in the dev server log.
+              </Text>
+            </Column>
+          )}
           <Button href="/signin" variant="tertiary" size="m">
             Use a different email
           </Button>

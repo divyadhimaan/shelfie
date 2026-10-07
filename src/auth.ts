@@ -9,13 +9,16 @@ import { accounts, sessions, users, verificationTokens } from "@/db/schema";
 const isDev = process.env.NODE_ENV !== "production";
 const hasResend = Boolean(process.env.AUTH_RESEND_KEY);
 
+/** True when magic links are printed to the server log instead of emailed. */
+export const emailLinksLoggedOnly = !hasResend && isDev;
+
 export const googleEnabled = Boolean(process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET);
 
 const providers: Provider[] = [
   // Email magic link. Without a Resend key in development, the link is printed to the server log.
   Resend({
     from: process.env.AUTH_EMAIL_FROM ?? "Shelfie <onboarding@resend.dev>",
-    ...(!hasResend && isDev
+    ...(emailLinksLoggedOnly
       ? {
           apiKey: "dev",
           sendVerificationRequest: ({ identifier, url }) => {
