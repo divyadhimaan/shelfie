@@ -1,17 +1,26 @@
-import { PagePlaceholder } from "@/components/shell";
+import { Column, Heading, Text } from "@once-ui-system/core";
+import { ImportFlow } from "@/components/import";
+import { getImportView } from "@/lib/import/service";
 import { requireUser } from "@/lib/session";
 import { meta } from "@/resources/seo";
 
 export const metadata = { title: meta.import.title };
 
 export default async function ImportPage() {
-  await requireUser("/import");
+  const user = await requireUser("/import");
+  const view = await getImportView(user.id);
 
   return (
-    <PagePlaceholder
-      title="Import from Goodreads"
-      description="Upload the CSV from Goodreads (My Books → Import and export). Shelfie matches each book, fills in covers and genres, and lets you review everything before it's saved."
-      requirements={["IMP-1", "IMP-2", "IMP-3", "IMP-4", "IMP-5", "IMP-6", "IMP-7", "CAT-1", "CAT-2", "CAT-3"]}
-    />
+    <Column maxWidth="s" gap="32" paddingY="64" s={{ paddingY: "32" }}>
+      <Column gap="12">
+        <Heading as="h1" variant="display-strong-s">
+          Import from Goodreads
+        </Heading>
+        <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
+          Bring your reading history into Shelfie once. After that, track new books here.
+        </Text>
+      </Column>
+      <ImportFlow view={view} />
+    </Column>
   );
 }

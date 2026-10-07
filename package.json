@@ -10,7 +10,8 @@
     "biome-write": "npx @biomejs/biome format --write .",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "test": "vitest run"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.3",
@@ -24,6 +25,7 @@
     "react-dom": "^19.2.5",
     "react-icons": "^5.2.1",
     "sass": "^1.77.6",
+    "server-only": "^0.0.1",
     "sharp": "^0.35.5"
   },
   "devDependencies": {
@@ -33,7 +35,8 @@
     "@types/react-dom": "19.0.2",
     "dotenv": "^18.0.6",
     "drizzle-kit": "^0.31.11",
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "vitest": "^4.1.11"
   },
   "overrides": {
     "@types/react": "19.0.1",

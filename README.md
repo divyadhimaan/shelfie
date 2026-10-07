@@ -34,6 +34,17 @@ npm run db:migrate    # applies pending migrations
 npm run db:studio     # browse data
 ```
 
+## Goodreads import
+
+`/import` takes a Goodreads library export (sample: [docs/samples/goodreads_library_export.csv](docs/samples/goodreads_library_export.csv)):
+
+1. **Upload**: the CSV is parsed ([src/lib/goodreads](src/lib/goodreads)) and every row stored in `import_rows`.
+2. **Match**: the browser asks the server to process rows in small batches; each is looked up on Open Library by ISBN, then title + author ([src/lib/catalog/openlibrary.ts](src/lib/catalog/openlibrary.ts)). Leaving the page pauses it; coming back resumes.
+3. **Review**: counts, unmatched rows, and a choice for read books without a "date read".
+4. **Save**: creates `user_books` and `reads` (re-reads become extra reads); books already in the library are skipped.
+
+Logic lives in [src/lib/import/service.ts](src/lib/import/service.ts). Run the parser and genre tests with `npm test`.
+
 ## Auth
 
 Auth.js v5 ([src/auth.ts](src/auth.ts)) with database sessions: email magic links (Resend) and Google. Library, Import, Stats and Wrap call `requireUser()` from [src/lib/session.ts](src/lib/session.ts) and redirect to `/signin` when signed out.

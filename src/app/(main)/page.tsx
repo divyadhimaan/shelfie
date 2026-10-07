@@ -1,4 +1,15 @@
-import { Book, Button, Card, Column, Grid, Heading, Icon, Row, Schema, Text } from "@once-ui-system/core";
+import {
+  Book,
+  Button,
+  Card,
+  Column,
+  Grid,
+  Heading,
+  Icon,
+  Row,
+  Schema,
+  Text,
+} from "@once-ui-system/core";
 import { baseURL, meta } from "@/resources/seo";
 import type { IconName } from "@/resources/icons";
 
@@ -58,8 +69,20 @@ export default function Home() {
 
         <Row flex={1} fillWidth gap="20" horizontal="center" s={{ gap: "12" }}>
           {sampleShelf.map((book) => (
-            <Book key={book.title} flex={1} maxWidth={10} aria-label={`${book.title}: ${book.stat}`}>
-              <Column fill padding="16" paddingLeft="20" vertical="end" gap="4" background={book.background}>
+            <Book
+              key={book.title}
+              flex={1}
+              maxWidth={10}
+              aria-label={`${book.title}: ${book.stat}`}
+            >
+              <Column
+                fill
+                padding="16"
+                paddingLeft="20"
+                vertical="end"
+                gap="4"
+                background={book.background}
+              >
                 <Text variant="label-default-s" onBackground="neutral-weak">
                   {book.title}
                 </Text>
@@ -74,7 +97,14 @@ export default function Home() {
 
       <Grid maxWidth="l" columns="3" gap="16" s={{ columns: 1 }}>
         {features.map((feature) => (
-          <Card key={feature.title} direction="column" padding="24" gap="12" radius="l" border="neutral-alpha-medium">
+          <Card
+            key={feature.title}
+            direction="column"
+            padding="24"
+            gap="12"
+            radius="l"
+            border="neutral-alpha-medium"
+          >
             <Icon name={feature.icon} size="m" onBackground="brand-strong" />
             <Heading as="h2" variant="heading-strong-m">
               {feature.title}

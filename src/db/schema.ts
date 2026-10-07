@@ -142,6 +142,10 @@ export const works = pgTable(
     subtitle: text("subtitle"),
     description: text("description"),
     firstPublishedYear: integer("first_published_year"),
+    // Default cover; an edition's own cover wins when the reader picked that edition.
+    coverUrl: text("cover_url"),
+    // Typical page count across editions; an edition's own count wins when known.
+    pages: integer("pages"),
     // Normalised to Shelfie's fixed genre list (CAT-4)
     genres: text("genres").array().notNull().default(sql`'{}'::text[]`),
     series: text("series"),

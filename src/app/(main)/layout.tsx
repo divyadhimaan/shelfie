@@ -9,7 +9,7 @@ import { fonts, style, dataStyle } from "@/resources/once-ui.config";
 import { Meta, Column, Flex, ThemeInit } from "@once-ui-system/core";
 import { Providers } from "@/components/Providers";
 import { AppHeader, BottomNav } from "@/components/shell";
-import { auth } from "@/auth";
+import { getSession } from "@/lib/session";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -26,7 +26,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
+  const session = await getSession();
   const user = session?.user
     ? { name: session.user.name, email: session.user.email, image: session.user.image }
     : null;
