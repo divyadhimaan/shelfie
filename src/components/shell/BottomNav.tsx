@@ -27,7 +27,12 @@ export function BottomNav() {
       {navItems.map((item) => {
         const active = isActive(pathname, item.href);
         return (
-          <SmartLink key={item.href} href={item.href} unstyled aria-current={active ? "page" : undefined}>
+          <SmartLink
+            key={item.href}
+            href={item.href}
+            unstyled
+            aria-current={active ? "page" : undefined}
+          >
             <Column horizontal="center" gap="4" paddingX="12" paddingY="4">
               <Icon
                 name={item.icon}

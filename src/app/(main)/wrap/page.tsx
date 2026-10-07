@@ -1,9 +1,12 @@
 import { PagePlaceholder } from "@/components/shell";
+import { requireUser } from "@/lib/session";
 import { meta } from "@/resources/seo";
 
 export const metadata = { title: meta.wrap.title };
 
-export default function WrapPage() {
+export default async function WrapPage() {
+  await requireUser("/wrap");
+
   return (
     <PagePlaceholder
       title="Year Shelfie"

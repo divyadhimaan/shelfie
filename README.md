@@ -8,16 +8,35 @@ Product requirements and the version roadmap live in [docs/requirements.md](docs
 
 - [Next.js](https://nextjs.org) (App Router, Turbopack)
 - [Once UI](https://docs.once-ui.com) (`@once-ui-system/core`) for layout, components and theming
-- Planned: Postgres + Drizzle, Auth.js, Satori for share cards (see the requirements doc)
+- Postgres + [Drizzle ORM](https://orm.drizzle.team)
+- [Auth.js](https://authjs.dev) (NextAuth v5): email magic links + Google
+- Planned: Satori for share cards (see the requirements doc)
 
 ## Getting started
 
+1. Install dependencies: `npm install`
+2. Copy `.env.example` to `.env.local` and fill in:
+   - `DATABASE_URL`: a Postgres connection string (Neon or Supabase, pooled URL)
+   - `AUTH_SECRET`: generate with `npx auth secret`
+   - Optional: `AUTH_RESEND_KEY` for real magic-link emails, `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` for Google sign-in
+3. Create the tables: `npm run db:migrate`
+4. Start the app: `npm run dev` and open http://localhost:3000
+
+In development without `AUTH_RESEND_KEY`, the sign-in link is printed in the dev server log instead of emailed.
+
+## Database
+
+Schema lives in [src/db/schema.ts](src/db/schema.ts) (Drizzle ORM, Postgres). After changing it:
+
 ```bash
-npm install
-npm run dev
+npm run db:generate   # writes a new SQL migration to drizzle/
+npm run db:migrate    # applies pending migrations
+npm run db:studio     # browse data
 ```
 
-Open http://localhost:3000.
+## Auth
+
+Auth.js v5 ([src/auth.ts](src/auth.ts)) with database sessions: email magic links (Resend) and Google. Library, Import, Stats and Wrap call `requireUser()` from [src/lib/session.ts](src/lib/session.ts) and redirect to `/signin` when signed out.
 
 ## Project layout
 

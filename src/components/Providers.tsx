@@ -1,6 +1,20 @@
 "use client";
 
-import { BorderStyle, DataThemeProvider, IconProvider, NeutralColor, ScalingSize, Schemes, SolidStyle, SolidType, SurfaceStyle, Theme, ThemeProvider, ToastProvider, TransitionStyle } from "@once-ui-system/core";
+import {
+  BorderStyle,
+  DataThemeProvider,
+  IconProvider,
+  NeutralColor,
+  ScalingSize,
+  Schemes,
+  SolidStyle,
+  SolidType,
+  SurfaceStyle,
+  Theme,
+  ThemeProvider,
+  ToastProvider,
+  TransitionStyle,
+} from "@once-ui-system/core";
 import { ChartMode, ChartVariant } from "@once-ui-system/core/data";
 // Core's LayoutProvider with the Next adapters installed: next/link for
 // internal links and next/image for images.
@@ -28,18 +42,16 @@ export function Providers({ children }: { children: React.ReactNode }) {
           mode={dataStyle.mode as ChartMode}
           height={dataStyle.height}
           axis={{
-            stroke: dataStyle.axis.stroke
+            stroke: dataStyle.axis.stroke,
           }}
           tick={{
             fill: dataStyle.tick.fill,
             fontSize: dataStyle.tick.fontSize,
-            line: dataStyle.tick.line
+            line: dataStyle.tick.line,
           }}
-          >
+        >
           <ToastProvider>
-            <IconProvider icons={iconLibrary}>
-              {children}
-            </IconProvider>
+            <IconProvider icons={iconLibrary}>{children}</IconProvider>
           </ToastProvider>
         </DataThemeProvider>
       </ThemeProvider>

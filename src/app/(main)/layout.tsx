@@ -9,6 +9,7 @@ import { fonts, style, dataStyle } from "@/resources/once-ui.config";
 import { Meta, Column, Flex, ThemeInit } from "@once-ui-system/core";
 import { Providers } from "@/components/Providers";
 import { AppHeader, BottomNav } from "@/components/shell";
+import { auth } from "@/auth";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -20,11 +21,16 @@ export async function generateMetadata() {
   });
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+  const user = session?.user
+    ? { name: session.user.name, email: session.user.email, image: session.user.image }
+    : null;
+
   return (
     <Flex
       suppressHydrationWarning
@@ -57,7 +63,7 @@ export default function RootLayout({
       </head>
       <Providers>
         <Column as="body" background="page" fillWidth minHeight="100dvh" margin="0" padding="0">
-          <AppHeader />
+          <AppHeader user={user} />
           <Column
             as="main"
             fillWidth

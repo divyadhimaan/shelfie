@@ -7,12 +7,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "biome-write": "npx @biomejs/biome format --write ."
+    "biome-write": "npx @biomejs/biome format --write .",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "^1.11.3",
     "@once-ui-system/core": "^2.0.0",
     "classnames": "^2.5.1",
+    "drizzle-orm": "^0.45.3",
     "next": "^16.2.3",
+    "next-auth": "^5.0.0-beta.32",
+    "postgres": "^3.4.9",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-icons": "^5.2.1",
@@ -24,6 +31,8 @@
     "@types/node": "20.17.23",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
+    "dotenv": "^18.0.6",
+    "drizzle-kit": "^0.31.11",
     "typescript": "5.8.2"
   },
   "overrides": {

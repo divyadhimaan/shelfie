@@ -1,10 +1,30 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Row, SmartLink, Text, ThemeSwitcher, ToggleButton } from "@once-ui-system/core";
+import {
+  Avatar,
+  Button,
+  IconButton,
+  Row,
+  SmartLink,
+  Text,
+  ThemeSwitcher,
+  ToggleButton,
+} from "@once-ui-system/core";
+import { signOutAction } from "@/app/actions/auth";
 import { isActive, navItems } from "./nav";
 
-export function AppHeader() {
+export type HeaderUser = {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+};
+
+type AppHeaderProps = {
+  user: HeaderUser | null;
+};
+
+export function AppHeader({ user }: AppHeaderProps) {
   const pathname = usePathname() ?? "/";
 
   return (
@@ -37,7 +57,32 @@ export function AppHeader() {
             />
           ))}
         </Row>
-        <ThemeSwitcher collapsed direction="row" />
+        <Row gap="8" vertical="center">
+          <ThemeSwitcher collapsed direction="row" />
+          {user ? (
+            <Row gap="8" vertical="center">
+              <Avatar
+                size="m"
+                src={user.image ?? undefined}
+                value={(user.name ?? user.email ?? "?").charAt(0).toUpperCase()}
+                aria-label={user.name ?? user.email ?? "Your account"}
+              />
+              <form action={signOutAction}>
+                <IconButton
+                  type="submit"
+                  icon="logout"
+                  variant="tertiary"
+                  tooltip="Sign out"
+                  aria-label="Sign out"
+                />
+              </form>
+            </Row>
+          ) : (
+            <Button href="/signin" size="m" variant="secondary">
+              Sign in
+            </Button>
+          )}
+        </Row>
       </Row>
     </Row>
   );

@@ -1,9 +1,12 @@
 import { PagePlaceholder } from "@/components/shell";
+import { requireUser } from "@/lib/session";
 import { meta } from "@/resources/seo";
 
 export const metadata = { title: meta.import.title };
 
-export default function ImportPage() {
+export default async function ImportPage() {
+  await requireUser("/import");
+
   return (
     <PagePlaceholder
       title="Import from Goodreads"

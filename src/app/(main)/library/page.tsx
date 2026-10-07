@@ -1,9 +1,12 @@
 import { PagePlaceholder } from "@/components/shell";
+import { requireUser } from "@/lib/session";
 import { meta } from "@/resources/seo";
 
 export const metadata = { title: meta.library.title };
 
-export default function LibraryPage() {
+export default async function LibraryPage() {
+  await requireUser("/library");
+
   return (
     <PagePlaceholder
       title="Library"

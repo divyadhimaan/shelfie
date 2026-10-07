@@ -23,7 +23,12 @@ export function PagePlaceholder({ title, description, requirements }: PagePlaceh
         </Text>
         <Row gap="8" wrap>
           {requirements.map((id) => (
-            <Badge key={id} textVariant="code-default-s" onBackground="neutral-medium" border="neutral-alpha-medium">
+            <Badge
+              key={id}
+              textVariant="code-default-s"
+              onBackground="neutral-medium"
+              border="neutral-alpha-medium"
+            >
               {id}
             </Badge>
           ))}
