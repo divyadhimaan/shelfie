@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Lets a second dev server (e.g. a test copy on another port) build into its own folder.
+  ...(process.env.NEXT_DIST_DIR ? { distDir: process.env.NEXT_DIST_DIR } : {}),
   sassOptions: {
     compiler: "modern",
     silenceDeprecations: ["legacy-js-api"],

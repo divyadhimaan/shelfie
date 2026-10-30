@@ -8,7 +8,7 @@ import { baseURL, meta } from "@/resources/seo";
 import { fonts, style, dataStyle } from "@/resources/once-ui.config";
 import { Meta, Column, Flex, ThemeInit } from "@once-ui-system/core";
 import { Providers } from "@/components/Providers";
-import { AppHeader, BottomNav } from "@/components/shell";
+import { AppHeader, BottomNav, TimeZoneSync } from "@/components/shell";
 import { getSession } from "@/lib/session";
 
 export async function generateMetadata() {
@@ -75,6 +75,7 @@ export default async function RootLayout({
             {children}
           </Column>
           <BottomNav />
+          {user && <TimeZoneSync />}
         </Column>
       </Providers>
     </Flex>

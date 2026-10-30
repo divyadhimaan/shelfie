@@ -1,6 +1,6 @@
 "use server";
 
-import { eq } from "drizzle-orm";
+import { and, eq, ne } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { users } from "@/db/schema";
@@ -29,4 +29,20 @@ export async function updateProfile(
   // The name shows in the header and on wrap cards.
   revalidatePath("/", "layout");
   return { ok: true, message: name ? "Saved." : "Name removed." };
+}
+
+/** Saves the browser's time zone so "today", greetings and goals use the reader's local date. */
+export async function syncTimeZone(timeZone: string): Promise<{ changed: boolean }> {
+  const user = await requireUser("/");
+  try {
+    new Intl.DateTimeFormat("en", { timeZone }); // throws on unknown zones
+  } catch {
+    return { changed: false };
+  }
+  const updated = await db
+    .update(users)
+    .set({ timezone: timeZone })
+    .where(and(eq(users.id, user.id), ne(users.timezone, timeZone)))
+    .returning({ id: users.id });
+  return { changed: updated.length > 0 };
 }

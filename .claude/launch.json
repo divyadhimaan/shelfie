@@ -4,8 +4,28 @@
     {
       "name": "shelfie-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3000
+    },
+    {
+      "name": "shelfie-test",
+      "runtimeExecutable": "/usr/bin/env",
+      "runtimeArgs": [
+        "DATABASE_URL=postgres://postgres:postgres@127.0.0.1:54329/postgres",
+        "DATABASE_POOL_MAX=1",
+        "AUTH_RESEND_KEY=",
+        "NEXT_DIST_DIR=.next-test",
+        "npx",
+        "next",
+        "dev",
+        "--turbopack",
+        "-p",
+        "3100"
+      ],
+      "port": 3100
     }
   ]
 }

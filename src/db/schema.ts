@@ -302,3 +302,46 @@ export const importRows = pgTable(
   },
   (t) => [uniqueIndex("import_rows_import_row_idx").on(t.importId, t.rowNumber)],
 );
+
+/* ------------------------------------------------------------------ */
+/* Progress and goals (TRK-3, TRK-7)                                   */
+/* ------------------------------------------------------------------ */
+
+// Each progress update on a read. Pages when the book's length is known, otherwise percent.
+export const progressUpdates = pgTable(
+  "progress_updates",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    readId: uuid("read_id")
+      .notNull()
+      .references(() => reads.id, { onDelete: "cascade" }),
+    page: integer("page"),
+    percent: integer("percent"),
+    note: text("note"),
+    createdAt: timestamp("created_at", { mode: "date", withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("progress_updates_read_idx").on(t.readId, t.createdAt),
+    check("progress_updates_has_value", sql`${t.page} is not null or ${t.percent} is not null`),
+    check(
+      "progress_updates_percent_range",
+      sql`${t.percent} is null or ${t.percent} between 0 and 100`,
+    ),
+  ],
+);
+
+export const goals = pgTable(
+  "goals",
+  {
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    year: integer("year").notNull(),
+    target: integer("target").notNull(),
+    ...timestamps,
+  },
+  (t) => [
+    primaryKey({ columns: [t.userId, t.year] }),
+    check("goals_target_range", sql`${t.target} between 1 and 1000`),
+  ],
+);
