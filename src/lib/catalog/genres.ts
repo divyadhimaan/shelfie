@@ -1,5 +1,5 @@
 /**
- * Shelfie's fixed genre list (CAT-4). Open Library subjects and Goodreads shelves
+ * Fineprints' fixed genre list (CAT-4). Open Library subjects and Goodreads shelves
  * are free text; mapping them onto this list keeps stats and wrap cards clean.
  */
 export const GENRES = [

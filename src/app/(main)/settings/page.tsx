@@ -2,7 +2,7 @@ import { Card, Column, Heading } from "@once-ui-system/core";
 import { ProfileForm } from "@/components/settings";
 import { requireUser } from "@/lib/session";
 
-export const metadata = { title: "Settings · Shelfie" };
+export const metadata = { title: "Settings · Fineprints" };
 
 export default async function SettingsPage() {
   const user = await requireUser("/settings");

@@ -1,10 +1,10 @@
-# Shelfie — Product Requirements
+# Fineprints — Product Requirements
 
 Oct 7, 2026 · @Divya Dhiman
 
 ## Overview
 
-Shelfie is a multi-user reading tracker that turns a year of reading into a shareable, Spotify-Wrapped-style "Year in Books" and feeds content straight into a book channel. Users import their Goodreads history once, then track all new reading in the app.
+Fineprints is a multi-user reading tracker that turns a year of reading into a shareable, Spotify-Wrapped-style "Year in Books" and feeds content straight into a book channel. Users import their Goodreads history once, then track all new reading in the app.
 
 **Target users**
 
@@ -298,11 +298,11 @@ Imports, metadata lookups and rating refreshes go through the job queue; the car
 
 **Open questions**
 
-- [ ] App name: Shelfie (chosen) — check domain, app stores, social handles and trademark before launch
+- [ ] App name: Fineprints (chosen; replaced the working name Shelfie) — check domain, app stores, social handles and trademark before launch
 - [ ] Channel platform: Instagram first (Stories, Reels, feed posts); YouTube and TikTok later
 - [ ] Free vs. paid: is anything premium (themes, video export, advanced stats)?
 - [ ] Hosting: Vercel + managed Postgres (Neon / Supabase), or one provider for all?
-- [ ] Email Hardcover: may Shelfie show their ratings (cached, server-side, credited with a link) and can we get a higher rate limit? Until they answer, Hardcover stays optional
+- [ ] Email Hardcover: may Fineprints show their ratings (cached, server-side, credited with a link) and can we get a higher rate limit? Until they answer, Hardcover stays optional
 
 **Risks**
 

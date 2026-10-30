@@ -1,4 +1,4 @@
-import { Row, SmartLink, Text } from "@once-ui-system/core";
+import { Heading, Row, SmartLink, Text } from "@once-ui-system/core";
 
 type SectionHeaderProps = {
   title: string;
@@ -8,12 +8,14 @@ type SectionHeaderProps = {
 export function SectionHeader({ title, action }: SectionHeaderProps) {
   return (
     <Row fillWidth horizontal="between" vertical="end" gap="12">
-      <Text as="h2" variant="label-strong-m" onBackground="neutral-medium">
+      <Heading as="h2" variant="heading-default-xl" onBackground="neutral-strong">
         {title}
-      </Text>
+      </Heading>
       {action && (
         <SmartLink href={action.href}>
-          <Text variant="label-default-s">{action.label}</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {action.label}
+          </Text>
         </SmartLink>
       )}
     </Row>

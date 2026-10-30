@@ -1,7 +1,7 @@
 // Import and set font for each variant
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 
-// Serif headings give Shelfie a bookish voice; Geist keeps UI text crisp.
+// Serif headings give Fineprints a bookish voice; Geist keeps UI text crisp.
 const heading = Fraunces({
   variable: "--font-heading",
   subsets: ["latin"],
@@ -35,13 +35,13 @@ const fonts = {
 
 // default customization applied to the HTML in the main layout.tsx
 const style = {
-  theme: "system", // dark | light | system
-  neutral: "sand", // sand | gray | slate | mint | rose | dusk | custom
-  brand: "orange", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
-  accent: "violet", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
-  solid: "contrast", // color | contrast | inverse
+  theme: "dark", // dark | light | system — Fineprints is dark-only (Midnight design)
+  neutral: "custom", // warm near-blacks, see custom.css // sand | gray | slate | mint | rose | dusk | custom
+  brand: "custom", // amber, see custom.css // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
+  accent: "orange", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
+  solid: "color", // color | contrast | inverse
   solidStyle: "flat", // flat | plastic
-  border: "playful", // rounded | playful | conservative | sharp
+  border: "rounded", // rounded | playful | conservative | sharp
   surface: "filled", // filled | translucent
   transition: "all", // all | micro | macro
   scaling: "100", // 90 | 95 | 100 | 105 | 110

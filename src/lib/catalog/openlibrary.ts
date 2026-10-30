@@ -14,7 +14,7 @@ const FIELDS = [
 ].join(",");
 
 // Open Library asks clients to identify themselves; identified clients get higher rate limits.
-const USER_AGENT = `Shelfie/0.1 (${process.env.OPENLIBRARY_CONTACT ?? "https://github.com/divyadhimaan/shelfie"})`;
+const USER_AGENT = `Fineprints/0.1 (${process.env.OPENLIBRARY_CONTACT ?? "https://github.com/divyadhimaan/shelfie"})`;
 
 export type OpenLibraryWork = {
   /** "OL45804W" */

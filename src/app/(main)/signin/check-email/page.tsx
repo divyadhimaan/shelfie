@@ -1,7 +1,7 @@
 import { Button, Card, Column, Heading, Icon, Text } from "@once-ui-system/core";
 import { emailLinksLoggedOnly } from "@/auth";
 
-export const metadata = { title: "Check your email · Shelfie" };
+export const metadata = { title: "Check your email · Fineprints" };
 
 export default function CheckEmailPage() {
   return (

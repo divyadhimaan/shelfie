@@ -1,4 +1,4 @@
-# Shelfie
+# Fineprints
 
 A reading tracker with a "Year in Books" wrap: import your Goodreads history, track new reads, see your stats, and share Instagram-ready cards.
 
@@ -35,7 +35,7 @@ In development without `AUTH_RESEND_KEY`, the sign-in link is printed in the dev
    | `DATABASE_URL` | Neon pooled connection string |
    | `AUTH_SECRET` | a new secret from `npx auth secret` (don't reuse your local one) |
    | `AUTH_RESEND_KEY` | Resend API key, for magic-link emails |
-   | `AUTH_EMAIL_FROM` | e.g. `Shelfie <login@yourdomain.com>`; until a domain is verified in Resend, only `onboarding@resend.dev` works and it only delivers to your own Resend account email |
+   | `AUTH_EMAIL_FROM` | e.g. `Fineprints <login@yourdomain.com>`; until a domain is verified in Resend, only `onboarding@resend.dev` works and it only delivers to your own Resend account email |
    | `AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET` | optional; add `https://<your-domain>/api/auth/callback/google` as a redirect URI |
 
 4. Deploy. Run `npm run db:migrate` against the production database whenever a change adds a migration in `drizzle/`.
@@ -68,7 +68,7 @@ npm run catalog:genres -- --dry   # preview changes
 npm run catalog:genres            # apply
 ```
 
-## Year Shelfie (wrap) and share cards
+## Year in Fineprints (wrap) and share cards
 
 `/wrap` shows a year as story cards (tap, swipe or arrow keys). Each card is a PNG rendered on the server with Satori (`next/og`):
 

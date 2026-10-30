@@ -26,7 +26,7 @@ export default async function WrapPage({ searchParams }: WrapPageProps) {
     <Column maxWidth="m" gap="24" paddingY="48" s={{ paddingY: "24" }}>
       <Column gap="12">
         <Heading as="h1" variant="display-strong-s">
-          Year Shelfie
+          Year in Fineprints
         </Heading>
         <Text variant="body-default-m" onBackground="neutral-weak" wrap="balance">
           Your reading year as story cards, ready for Instagram. Tap or swipe through, then download
@@ -52,7 +52,7 @@ export default async function WrapPage({ searchParams }: WrapPageProps) {
             No finished books yet
           </Heading>
           <Text variant="body-default-m" onBackground="neutral-weak">
-            Your Year Shelfie appears once you&apos;ve finished a book with a date.
+            Your Year in Fineprints appears once you&apos;ve finished a book with a date.
           </Text>
           <Button href="/import" prefixIcon="upload" size="m">
             Import from Goodreads

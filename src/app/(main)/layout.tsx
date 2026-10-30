@@ -6,9 +6,10 @@ import classNames from "classnames";
 
 import { baseURL, meta } from "@/resources/seo";
 import { fonts, style, dataStyle } from "@/resources/once-ui.config";
-import { Meta, Column, Flex, ThemeInit } from "@once-ui-system/core";
+import { Meta, Column, Flex, Row, ThemeInit } from "@once-ui-system/core";
 import { Providers } from "@/components/Providers";
-import { AppHeader, BottomNav, TimeZoneSync } from "@/components/shell";
+import { AppHeader, BottomNav, Sidebar, TimeZoneSync } from "@/components/shell";
+import { getNowReadingMini } from "@/lib/reading/home";
 import { getSession } from "@/lib/session";
 
 export async function generateMetadata() {
@@ -30,6 +31,7 @@ export default async function RootLayout({
   const user = session?.user
     ? { name: session.user.name, email: session.user.email, image: session.user.image }
     : null;
+  const nowReading = session?.user?.id ? await getNowReadingMini(session.user.id) : null;
 
   return (
     <Flex
@@ -64,17 +66,22 @@ export default async function RootLayout({
       <Providers>
         <Column as="body" background="page" fillWidth minHeight="100dvh" margin="0" padding="0">
           <AppHeader user={user} />
-          <Column
-            as="main"
-            fillWidth
-            horizontal="center"
-            paddingX="l"
-            paddingBottom="64"
-            s={{ paddingX: "16", style: { paddingBottom: "6rem" } }}
-          >
-            {children}
-          </Column>
-          <BottomNav />
+          <Row fillWidth vertical="start">
+            {user && <Sidebar user={user} nowReading={nowReading} />}
+            <Column
+              as="main"
+              fillWidth
+              horizontal="center"
+              paddingX="xl"
+              paddingBottom="64"
+              style={{ minWidth: 0 }}
+              m={{ paddingX: "l", style: { paddingBottom: "6rem" } }}
+              s={{ paddingX: "16" }}
+            >
+              {children}
+            </Column>
+          </Row>
+          {user && <BottomNav />}
           {user && <TimeZoneSync />}
         </Column>
       </Providers>

@@ -56,7 +56,7 @@ export function RankedBars({ title, items, unit, emptyText }: RankedBarsProps) {
                   style={{
                     width: `${(item.count / max) * 100}%`,
                     // Same validated chart color as the column charts.
-                    background: "var(--shelfie-chart)",
+                    background: "var(--fineprints-chart)",
                   }}
                 />
               </Row>

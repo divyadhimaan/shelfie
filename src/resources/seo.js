@@ -13,21 +13,21 @@ const description =
 const meta = {
   home: {
     path: "/",
-    title: "Shelfie — your year in books",
+    title: "Fineprints — your year in books",
     description,
     robots: "index,follow",
   },
-  library: { path: "/library", title: "Library · Shelfie", description },
-  import: { path: "/import", title: "Import from Goodreads · Shelfie", description },
-  stats: { path: "/stats", title: "Reading stats · Shelfie", description },
-  wrap: { path: "/wrap", title: "Year Shelfie · Shelfie", description },
+  library: { path: "/library", title: "Library · Fineprints", description },
+  import: { path: "/import", title: "Import from Goodreads · Fineprints", description },
+  stats: { path: "/stats", title: "Reading stats · Fineprints", description },
+  wrap: { path: "/wrap", title: "Year in Fineprints", description },
 };
 
 // default schema data
 const schema = {
   logo: "",
   type: "Organization",
-  name: "Shelfie",
+  name: "Fineprints",
   description,
   email: "",
 };

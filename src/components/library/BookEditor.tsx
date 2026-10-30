@@ -117,7 +117,7 @@ export function BookEditor({ userBookId, initial }: { userBookId: string; initia
             checked={hidden}
             onToggle={() => setHidden((h) => !h)}
             label="Hide from sharing"
-            description="Kept in your library and stats, but never on Year Shelfie cards."
+            description="Kept in your library and stats, but never on Year in Fineprints cards."
           />
         </Column>
 

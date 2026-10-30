@@ -185,3 +185,49 @@ export async function getHomeData(userId: string): Promise<HomeData> {
     upNext,
   };
 }
+
+export type NowReadingMini = {
+  id: string;
+  title: string;
+  coverUrl: string | null;
+  progress: Progress;
+};
+
+/** The most recently touched book on the go, for the sidebar card. One small query per page. */
+export async function getNowReadingMini(userId: string): Promise<NowReadingMini | null> {
+  const [row] = await db
+    .select({
+      id: userBooks.id,
+      title: works.title,
+      coverUrl: sql<string | null>`coalesce(${editions.coverUrl}, ${works.coverUrl})`,
+      totalPages: sql<number | null>`coalesce(${editions.pages}, ${works.pages})`,
+      readId: reads.id,
+    })
+    .from(userBooks)
+    .innerJoin(works, eq(works.id, userBooks.workId))
+    .leftJoin(reads, and(eq(reads.userBookId, userBooks.id), isNull(reads.finishedAt)))
+    .leftJoin(editions, eq(editions.id, reads.editionId))
+    .where(and(eq(userBooks.userId, userId), eq(userBooks.status, "reading")))
+    .orderBy(desc(userBooks.updatedAt))
+    .limit(1);
+  if (!row) return null;
+
+  const [latest] = row.readId
+    ? await db
+        .select()
+        .from(progressUpdates)
+        .where(eq(progressUpdates.readId, row.readId))
+        .orderBy(desc(progressUpdates.createdAt))
+        .limit(1)
+    : [];
+  const totalPages = row.totalPages === null ? null : Number(row.totalPages);
+  return {
+    id: row.id,
+    title: row.title,
+    coverUrl: row.coverUrl,
+    progress: currentProgress(
+      latest ? [{ page: latest.page, percent: latest.percent, at: latest.createdAt }] : [],
+      totalPages,
+    ),
+  };
+}

@@ -2,9 +2,9 @@
 
 import { usePathname } from "next/navigation";
 import { Column, Icon, Row, SmartLink, Text } from "@once-ui-system/core";
-import { isActive, navItems } from "./nav";
+import { isActive, tabItems } from "./nav";
 
-// Phone-only tab bar: Shelfie is a PWA, so the main actions sit under the thumb.
+// Tablet and phone tab bar (the sidebar takes over on desktop): Fineprints is a PWA, so the main actions sit under the thumb.
 export function BottomNav() {
   const pathname = usePathname() ?? "/";
 
@@ -13,7 +13,7 @@ export function BottomNav() {
       as="nav"
       aria-label="Main"
       hide
-      s={{ hide: false }}
+      m={{ hide: false }}
       position="fixed"
       bottom="0"
       left="0"
@@ -24,7 +24,7 @@ export function BottomNav() {
       paddingY="8"
       horizontal="around"
     >
-      {navItems.map((item) => {
+      {tabItems.map((item) => {
         const active = isActive(pathname, item.href);
         return (
           <SmartLink

@@ -23,7 +23,7 @@ const features: { icon: IconName; title: string; body: string }[] = [
   {
     icon: "upload",
     title: "Bring your Goodreads history",
-    body: "Upload your Goodreads export once. Shelfie matches every book, fixes covers and keeps your ratings.",
+    body: "Upload your Goodreads export once. Fineprints matches every book, fixes covers and keeps your ratings.",
   },
   {
     icon: "library",
@@ -32,7 +32,7 @@ const features: { icon: IconName; title: string; body: string }[] = [
   },
   {
     icon: "wrap",
-    title: "Share your Year Shelfie",
+    title: "Share your Year in Fineprints",
     body: "Your reading year as story cards, sized for Instagram Stories, Reels and feed posts.",
   },
 ];
@@ -56,7 +56,7 @@ export function Landing() {
           </Heading>
           <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
             Import your Goodreads history, track every read, and turn it all into a shareable Year
-            Shelfie.
+            in Fineprints.
           </Text>
           <Row gap="12" marginTop="8" s={{ direction: "column" }}>
             <Button href="/import" prefixIcon="upload" size="l">

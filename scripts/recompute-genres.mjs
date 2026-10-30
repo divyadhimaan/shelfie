@@ -9,7 +9,7 @@ import { normalizeGenres } from "../src/lib/catalog/genres.ts";
 config({ path: [".env.local", ".env"] });
 const dry = process.argv.includes("--dry");
 const sql = postgres(process.env.DATABASE_URL, { max: 1, prepare: false });
-const USER_AGENT = `Shelfie/0.1 (${process.env.OPENLIBRARY_CONTACT ?? "https://github.com/divyadhimaan/shelfie"})`;
+const USER_AGENT = `Fineprints/0.1 (${process.env.OPENLIBRARY_CONTACT ?? "https://github.com/divyadhimaan/shelfie"})`;
 
 async function fetchSubjects(olWorkId) {
   const response = await fetch(`https://openlibrary.org/works/${olWorkId}.json`, {

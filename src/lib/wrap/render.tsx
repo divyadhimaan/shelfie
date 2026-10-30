@@ -12,7 +12,7 @@ const C = {
   muted: "#a7a59c",
   line: "#302e27",
   accent: "#e79d7b", // terracotta, lightened for large text on the dark card
-  bar: "#b7684c", // --shelfie-chart
+  bar: "#b7684c", // --fineprints-chart
 };
 
 const FONT_FILES = [
@@ -220,7 +220,7 @@ function Body({
     case "intro":
       return (
         <Stack>
-          <Eyebrow size={t.eyebrow}>Year Shelfie</Eyebrow>
+          <Eyebrow size={t.eyebrow}>Year in Fineprints</Eyebrow>
           <Big size={big * 0.74}>{`Your ${card.year}`}</Big>
           <Big size={big * 0.74}>in books</Big>
           {card.name ? (
@@ -360,7 +360,7 @@ function Body({
       ];
       return (
         <Stack>
-          <Eyebrow size={t.eyebrow}>{`My ${card.year} Year Shelfie`}</Eyebrow>
+          <Eyebrow size={t.eyebrow}>{`My ${card.year} in Fineprints`}</Eyebrow>
           <div style={{ display: "flex", flexDirection: "column", marginTop: 24 }}>
             {rows.map(([label, value]) => (
               <div
@@ -423,7 +423,7 @@ export async function renderCard(card: WrapCard, size: CardSize, footer: string)
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div style={{ display: "flex", fontFamily: "Fraunces", fontSize: 52, color: C.ink }}>
-          Shelfie
+          fineprints
         </div>
         <div
           style={{ display: "flex", width: 120, height: 8, borderRadius: 4, background: C.bar }}

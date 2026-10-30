@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { auth, googleEnabled } from "@/auth";
 import { signInWithEmail, signInWithGoogle } from "@/app/actions/auth";
 
-export const metadata = { title: "Sign in · Shelfie" };
+export const metadata = { title: "Sign in · Fineprints" };
 
 const errorMessages: Record<string, string> = {
   EmailRequired: "Enter your email address.",
@@ -39,10 +39,10 @@ export default async function SignInPage({ searchParams }: SignInPageProps) {
         >
           <Column gap="8">
             <Heading as="h1" variant="display-strong-xs">
-              Sign in to Shelfie
+              Sign in to Fineprints
             </Heading>
             <Text variant="body-default-m" onBackground="neutral-weak">
-              Import your Goodreads history and start your Year Shelfie.
+              Import your Goodreads history and start your Year in Fineprints.
             </Text>
           </Column>
 

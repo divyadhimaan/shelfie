@@ -4,8 +4,10 @@ import {
   HiOutlineArrowUpTray,
   HiOutlineBookOpen,
   HiOutlineChartBar,
+  HiOutlineCog6Tooth,
   HiOutlineHome,
   HiOutlineSparkles,
+  HiOutlineUserCircle,
 } from "react-icons/hi2";
 
 // Merged with Once UI's built-in icons by IconProvider.
@@ -15,6 +17,8 @@ export const iconLibrary = {
   upload: HiOutlineArrowUpTray,
   stats: HiOutlineChartBar,
   wrap: HiOutlineSparkles,
+  profile: HiOutlineUserCircle,
+  settings: HiOutlineCog6Tooth,
 } satisfies Record<string, IconType>;
 
 type CustomIcons = { [K in keyof typeof iconLibrary]: true };

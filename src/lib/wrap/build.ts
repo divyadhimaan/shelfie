@@ -1,4 +1,4 @@
-/** Turns a year of reads into the Year Shelfie card sequence (WRP-1, WRP-2). Pure, so it's easy to test. */
+/** Turns a year of reads into the Year in Fineprints card sequence (WRP-1, WRP-2). Pure, so it's easy to test. */
 import { type FinishedRead, computeStats } from "@/lib/stats/compute";
 
 export const CARD_SIZES = {

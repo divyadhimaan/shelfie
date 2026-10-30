@@ -83,7 +83,7 @@ export const users = pgTable("users", {
   email: text("email").unique(),
   emailVerified: timestamp("email_verified", { mode: "date" }),
   image: text("image"),
-  // Shelfie profile fields (ACC-2, ACC-3, ACC-4)
+  // Fineprints profile fields (ACC-2, ACC-3, ACC-4)
   username: text("username").unique(),
   bio: text("bio"),
   privacy: profilePrivacy("privacy").notNull().default("public"),
@@ -148,7 +148,7 @@ export const works = pgTable(
     pages: integer("pages"),
     // Raw catalog subjects, kept so genres can be recomputed when the mapping improves.
     subjects: text("subjects").array().notNull().default(sql`'{}'::text[]`),
-    // Normalised to Shelfie's fixed genre list (CAT-4)
+    // Normalised to Fineprints' fixed genre list (CAT-4)
     genres: text("genres").array().notNull().default(sql`'{}'::text[]`),
     series: text("series"),
     seriesPosition: real("series_position"),

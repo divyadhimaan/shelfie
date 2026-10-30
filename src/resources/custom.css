@@ -68,19 +68,73 @@
   /*
 }*/
 
-/* Shelfie chart color: muted terracotta. Validated with the dataviz palette script
-   (lightness, chroma, contrast) on light #fefcf4 and dark #171611 surfaces.
-   Softer alternatives that also pass: clay oklch(0.63 0.10 50), amber-sand oklch(0.66 0.10 70). */
+/* Midnight palette (design direction A): warm near-blacks and an amber accent.
+   Wired into Once UI as custom neutral and brand scales (once-ui.config.js: neutral/brand "custom"),
+   so every component picks them up. In the dark theme Once UI uses neutral 100 for the page,
+   200 for surfaces, 300 for borders, 700 for muted text and 900 for secondary text. */
 :root {
-  --shelfie-chart: oklch(0.6 0.11 40);
+  --scheme-neutral-100: #131010;
+  --scheme-neutral-200: #1d1917;
+  --scheme-neutral-300: #2b2522;
+  --scheme-neutral-400: #3a322d;
+  --scheme-neutral-500: oklch(0.45 0.015 60);
+  --scheme-neutral-600: oklch(0.58 0.016 65);
+  --scheme-neutral-700: #a69d94;
+  --scheme-neutral-800: oklch(0.77 0.017 70);
+  --scheme-neutral-900: #cfc6bc;
+  --scheme-neutral-1000: oklch(0.89 0.014 72);
+  --scheme-neutral-1100: oklch(0.93 0.012 75);
+  --scheme-neutral-1200: #f4efe8;
+  --scheme-neutral-600-15: oklch(0.58 0.016 65 / 0.15);
+  --scheme-neutral-600-30: oklch(0.58 0.016 65 / 0.3);
+  --scheme-neutral-600-50: oklch(0.58 0.016 65 / 0.5);
+
+  --scheme-brand-100: oklch(0.2 0.03 50);
+  --scheme-brand-200: oklch(0.26 0.05 52);
+  --scheme-brand-300: oklch(0.36 0.08 55);
+  --scheme-brand-400: oklch(0.5 0.1 57);
+  --scheme-brand-500: #e8a065;
+  --scheme-brand-600: oklch(0.8 0.1 60);
+  --scheme-brand-700: #e8a065;
+  --scheme-brand-800: oklch(0.84 0.08 62);
+  --scheme-brand-900: oklch(0.9 0.05 65);
+  --scheme-brand-1000: oklch(0.94 0.03 68);
+  --scheme-brand-1100: oklch(0.96 0.02 70);
+  --scheme-brand-1200: oklch(0.98 0.01 72);
+  --scheme-brand-600-15: oklch(0.8 0.1 60 / 0.15);
+  --scheme-brand-600-30: oklch(0.8 0.1 60 / 0.3);
+  --scheme-brand-600-50: oklch(0.8 0.1 60 / 0.5);
+
+  /* Chart color: amber stepped down into the dataviz lightness band for dark surfaces. */
+  --fineprints-chart: oklch(0.66 0.11 55);
+  --fineprints-amber: #e8a065;
+}
+
+/* Primary buttons: amber with dark text (8.7:1), as in the design. */
+[data-solid="color"][data-theme="dark"] {
+  --brand-solid-strong: #e8a065;
+  --brand-solid-medium: oklch(0.7 0.11 57);
+  --brand-on-solid-strong: #131010;
+  --brand-on-solid-medium: #131010;
 }
 
 /* On tablets and phones Once UI pins dialogs to all four edges (a full-screen page).
-   Shelfie's dialogs are short quick actions, so make them bottom sheets instead:
+   Fineprints' dialogs are short quick actions, so make them bottom sheets instead:
    anchored to the bottom, only as tall as their content, within thumb reach. */
 @media (max-width: 1024px) {
   [role="dialog"][aria-modal="true"] [class*="Dialog-module"][class*="__dialog"] {
     top: auto !important;
     max-height: calc(100dvh - 4rem);
   }
+}
+
+/* Page stepper: a plain number field (the − / + buttons replace the browser's spin arrows). */
+.fineprints-number {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+.fineprints-number::-webkit-inner-spin-button,
+.fineprints-number::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

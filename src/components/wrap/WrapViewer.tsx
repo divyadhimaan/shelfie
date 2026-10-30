@@ -28,7 +28,7 @@ type WrapViewerProps = {
 const cardUrl = (year: number, kind: CardKind, size: CardSize, version: string, download = false) =>
   `/api/wrap/${year}/${kind}?size=${size}&v=${version}${download ? "&download=1" : ""}`;
 
-/** Story-style viewer for the Year Shelfie cards (WRP-1) with download and share (SHR-2, SHR-3). */
+/** Story-style viewer for the Year in Fineprints cards (WRP-1) with download and share (SHR-2, SHR-3). */
 export function WrapViewer({ year, cards, version }: WrapViewerProps) {
   const [index, setIndex] = useState(0);
   const [size, setSize] = useState<CardSize>("story");
@@ -67,8 +67,11 @@ export function WrapViewer({ year, cards, version }: WrapViewerProps) {
     setSharing(true);
     try {
       const blob = await (await fetch(cardUrl(year, kind, size, version))).blob();
-      const file = new File([blob], `shelfie-${year}-${kind}.png`, { type: "image/png" });
-      await navigator.share({ files: [file], text: `My ${year} Year Shelfie #MyShelfie${year}` });
+      const file = new File([blob], `fineprints-${year}-${kind}.png`, { type: "image/png" });
+      await navigator.share({
+        files: [file],
+        text: `My ${year} Year in Fineprints #Fineprints${year}`,
+      });
     } catch {
       // Cancelled or unsupported: nothing to do.
     } finally {
@@ -85,7 +88,7 @@ export function WrapViewer({ year, cards, version }: WrapViewerProps) {
           tabIndex={0}
           role="region"
           aria-roledescription="carousel"
-          aria-label={`Year Shelfie ${year}, card ${index + 1} of ${cards.length}: ${CARD_TITLES[kind]}. Use the arrow keys to move.`}
+          aria-label={`Year in Fineprints ${year}, card ${index + 1} of ${cards.length}: ${CARD_TITLES[kind]}. Use the arrow keys to move.`}
           onKeyDown={(event) => {
             if (event.key === "ArrowRight") go(1);
             if (event.key === "ArrowLeft") go(-1);

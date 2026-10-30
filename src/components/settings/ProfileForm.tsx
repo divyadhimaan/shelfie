@@ -17,7 +17,7 @@ export function ProfileForm({ name, email }: { name: string | null; email: strin
           defaultValue={name ?? ""}
           maxLength={50}
           autoComplete="given-name"
-          description="Shown on your Year Shelfie cards (first name only)."
+          description="Shown on your Year in Fineprints cards (first name only)."
         />
         {email && (
           <Text variant="body-default-s" onBackground="neutral-weak">

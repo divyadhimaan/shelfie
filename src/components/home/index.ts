@@ -1,8 +1,11 @@
+export { AlsoReading } from "./AlsoReading";
 export { CoverShelf } from "./CoverShelf";
 export { FinishDialog } from "./FinishDialog";
 export { GoalCard } from "./GoalCard";
-export { ProgressDialog } from "./ProgressDialog";
+export { HeroReading } from "./HeroReading";
+export { PageStepper } from "./PageStepper";
+export { ProgressTrack } from "./ProgressTrack";
 export { ReadingHome } from "./ReadingHome";
-export { ReadingNowCard } from "./ReadingNowCard";
+export { RecentlyFinished } from "./RecentlyFinished";
 export { SectionHeader } from "./SectionHeader";
 export { StartReadingButton } from "./StartReadingButton";

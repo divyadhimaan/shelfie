@@ -27,7 +27,7 @@ export async function GET(
   const card = cards.find((c) => c.kind === kind);
   if (!card) return NextResponse.json({ error: "No such card for this year." }, { status: 404 });
 
-  const image = await renderCard(card, size, `#MyShelfie${year}`);
+  const image = await renderCard(card, size, `#Fineprints${year}`);
   const headers = new Headers(image.headers);
   // Personal data: browser cache only. Versioned URLs (?v=) change with the data, so a day is safe.
   headers.set(
@@ -37,7 +37,7 @@ export async function GET(
   if (url.searchParams.get("download")) {
     headers.set(
       "Content-Disposition",
-      `attachment; filename="shelfie-${year}-${kind}-${size}.png"`,
+      `attachment; filename="fineprints-${year}-${kind}-${size}.png"`,
     );
   }
   return new Response(image.body, { status: image.status, headers });

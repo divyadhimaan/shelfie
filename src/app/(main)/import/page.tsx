@@ -17,7 +17,7 @@ export default async function ImportPage() {
           Import from Goodreads
         </Heading>
         <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
-          Bring your reading history into Shelfie once. After that, track new books here.
+          Bring your reading history into Fineprints once. After that, track new books here.
         </Text>
       </Column>
       <ImportFlow view={view} />

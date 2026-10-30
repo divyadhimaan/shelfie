@@ -1,0 +1,37 @@
+// One amber hue, getting brighter with more pages read (sequential, as for any magnitude).
+// Cells stretch to fill the card; below ~10px each the wrapper scrolls instead.
+.grid,
+.months {
+  display: grid;
+  grid-template-columns: repeat(var(--weeks), minmax(10px, 1fr));
+  column-gap: 3px;
+  min-width: calc(var(--weeks) * 13px);
+}
+
+.grid {
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, auto);
+  row-gap: 3px;
+}
+
+.cell {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 3px;
+  background: var(--neutral-alpha-weak);
+
+  &[data-level="1"] { background: color-mix(in oklch, var(--fineprints-amber) 28%, var(--surface-background)); }
+  &[data-level="2"] { background: color-mix(in oklch, var(--fineprints-amber) 50%, var(--surface-background)); }
+  &[data-level="3"] { background: color-mix(in oklch, var(--fineprints-amber) 75%, var(--surface-background)); }
+  &[data-level="4"] { background: var(--fineprints-amber); }
+  &[data-future="true"] { background: transparent; }
+}
+
+.legend {
+  width: 12px;
+}
+
+.month {
+  white-space: nowrap;
+  overflow: visible;
+}

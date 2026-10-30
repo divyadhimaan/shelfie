@@ -17,7 +17,7 @@ export const googleEnabled = Boolean(process.env.AUTH_GOOGLE_ID && process.env.A
 const providers: Provider[] = [
   // Email magic link. Without a Resend key in development, the link is printed to the server log.
   Resend({
-    from: process.env.AUTH_EMAIL_FROM ?? "Shelfie <onboarding@resend.dev>",
+    from: process.env.AUTH_EMAIL_FROM ?? "Fineprints <onboarding@resend.dev>",
     ...(emailLinksLoggedOnly
       ? {
           apiKey: "dev",

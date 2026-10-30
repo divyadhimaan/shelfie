@@ -257,7 +257,7 @@ function ReviewStep({ view }: { view: Extract<ImportView, { state: "review" }> }
           </Heading>
           <Text variant="body-default-s" onBackground="neutral-weak">
             Goodreads often leaves this blank. It decides which year a book counts toward in your
-            stats and Year Shelfie.
+            stats and Year in Fineprints.
           </Text>
           <Column gap="8" role="radiogroup" aria-label="Books without a date read">
             <RadioButton
@@ -364,7 +364,7 @@ function DoneStep({
         description={
           view.skipped > 0
             ? `${view.skipped} ${view.skipped === 1 ? "was" : "were"} already in your library and left unchanged.`
-            : "Your Goodreads history is in Shelfie."
+            : "Your Goodreads history is in Fineprints."
         }
       />
       <Row gap="12" s={{ direction: "column" }}>

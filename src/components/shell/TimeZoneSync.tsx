@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { syncTimeZone } from "@/app/actions/profile";
 
-const KEY = "shelfie:tz-synced";
+const KEY = "fineprints:tz-synced";
 
 /** Tells the server the reader's time zone once per tab session; refreshes if it changed. */
 export function TimeZoneSync() {

@@ -25,7 +25,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ year
 
   const files: Record<string, Uint8Array> = {};
   for (const [index, card] of cards.entries()) {
-    const image = await renderCard(card, size, `#MyShelfie${year}`);
+    const image = await renderCard(card, size, `#Fineprints${year}`);
     const name = `${String(index + 1).padStart(2, "0")}-${card.kind}.png`;
     files[name] = new Uint8Array(await image.arrayBuffer());
   }
@@ -35,7 +35,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ year
   return new Response(zip, {
     headers: {
       "Content-Type": "application/zip",
-      "Content-Disposition": `attachment; filename="shelfie-${year}-${size}.zip"`,
+      "Content-Disposition": `attachment; filename="fineprints-${year}-${size}.zip"`,
       "Cache-Control": "private, no-store",
     },
   });
